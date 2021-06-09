@@ -1,35 +1,17 @@
 import React from 'react';
-import './index.css';
-import logoPath from './images/header-logo.svg';
+import './../index.css';
+import Header from './Header';
+import Main from './Main';
+import Footer from './Footer';
+
 
 function App() {
   return (
     <div className="page">
       <div className="page__container">
-        <header className="header page__header">
-          <img src={logoPath} className="header__logo" alt="Логотип сервиса Mesto Russia" />
-        </header>
-        <main className="content page__content">
-          <section className="profile content__section">
-            <div className="profile__avatar-container">
-              <img className="profile__avatar" src="#" alt="Логотип профиля" />
-              <button className="profile__avatar-btn" aria-label="Обновить аватар"></button>
-            </div>
-            <div className="profile__info">
-              <h1 className="profile__name">Жак-Ив Кусто</h1>
-              <p className="profile__bio">Исследователь океана</p>
-              <button className="profile__edit-btn" type="button" aria-label="Редактировать профиль"></button>
-            </div>
-            <button className="profile__add-btn" type="button" aria-label="Добавить фотографию"></button>
-          </section>
-          <section className="elements content__section">
-            <ul className="elements__list">
-            </ul>
-          </section>
-        </main>
-        <footer className="footer page__footer">
-          <p className="footer__copyright">&copy; 2021 Mesto Russia</p>
-        </footer>
+        <Header />
+        <Main />
+        <Footer />
         <div className="popup popup_type_edit">
           <div className="popup__container popup__container_type_form">
             <button className="popup__close-btn" type="button" aria-label="Закрыть окно"></button>
