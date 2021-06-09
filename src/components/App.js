@@ -3,6 +3,8 @@ import './../index.css';
 import Header from './Header';
 import Main from './Main';
 import Footer from './Footer';
+import PopupWithForm from './PopupWithForm';
+import ImagePopup from './ImagePopup';
 
 
 function App() {
@@ -12,67 +14,53 @@ function App() {
         <Header />
         <Main />
         <Footer />
-        <div className="popup popup_type_edit">
-          <div className="popup__container popup__container_type_form">
-            <button className="popup__close-btn" type="button" aria-label="Закрыть окно"></button>
-            <form className="form edit-form" name="edit-form" novalidate>
-              <h2 className="form__heading">Редактировать профиль</h2>
-              <fieldset className="form__items">
-                <input className="form__item form__item_el_name" id="profile-name" type="text" name="name" placeholder="Имя" minlength="2" maxlength="40" required />
-                <p className="form__error" id="profile-name-error"></p>
-                <input className="form__item form__item_el_bio" id="profile-bio" type="text" name="about" placeholder="О себе" minlength="2" maxlength="200" required />
-                <p className="form__error" id="profile-bio-error"></p>
-              </fieldset>
-              <button className="form__submit-btn" type="submit">Сохранить</button>
-            </form>
-          </div>
-        </div>
-        <div className="popup popup_type_add">
-          <div className="popup__container popup__container_type_form">
-            <button className="popup__close-btn" type="button" aria-label="Закрыть окно"></button>
-            <form className="form add-form" name="add-form" novalidate>
-              <h2 className="form__heading">Новое место</h2>
-              <fieldset className="form__items">
-                <input className="form__item form__item_el_name" id="item-name" type="text" name="name" placeholder="Название" minlength="2" maxlength="30" required />
-                <p className="form__error" id="item-name-error"></p>
-                <input className="form__item form__item_el_link" id="item-url" type="url" name="link" placeholder="Ссылка на картинку" required />
-                <p className="form__error" id="item-url-error"></p>
-              </fieldset>
-              <button className="form__submit-btn" type="submit">Создать</button>
-            </form>
-          </div>
-        </div>
-        <div className="popup popup_type_image">
-          <div className="popup__container popup__container_type_image">
-            <button className="popup__close-btn" type="button" aria-label="Закрыть окно"></button>
-            <figure className="popup__figure">
-              <img className="popup__image" src="#" alt="альт" />
-              <figcaption className="popup__image-caption"></figcaption>
-            </figure>
-          </div>
-        </div>
-        <div className="popup popup_type_confirm">
-          <div className="popup__container popup__container_type_form">
-            <button className="popup__close-btn" type="button" aria-label="Закрыть окно"></button>
-            <form className="form confirm-form" name="confirm-form" novalidate>
-              <h2 className="form__heading form__heading_place_confirm">Вы уверены?</h2>
-              <button className="form__submit-btn" type="submit">Да</button>
-            </form>
-          </div>
-        </div>
-        <div className="popup popup-type-avatar">
-          <div className="popup__container popup__container_type_form">
-            <button className="popup__close-btn" type="button" aria-label="Закрыть окно"></button>
-            <form className="form avatar-form" name="avatar" novalidate>
-              <h2 className="form__heading">Обновить аватар</h2>
-              <fieldset className="form__items">
-                <input className="form__item" id="avatar-url" type="url" name="avatar" placeholder="Ссылка на картинку" required />
+        <PopupWithForm
+        name="edit"
+        title="Редактировать профиль"
+        children={
+          <>
+            <input className="form__item form__item_el_name" id="profile-name" type="text" name="name" placeholder="Имя" minLength="2" maxLength="40" required />
+            <p className="form__error" id="profile-name-error"></p>
+            <input className="form__item form__item_el_bio" id="profile-bio" type="text" name="about" placeholder="О себе" minLength="2" maxLength="200" required />
+            <p className="form__error" id="profile-bio-error"></p>
+          </>
+        }
+        buttonText="Сохранить"
+        />
+        <PopupWithForm
+        name="add"
+        title="Новое место"
+        children={
+          <>
+            <input className="form__item form__item_el_name" id="item-name" type="text" name="name" placeholder="Название" minLength="2" maxLength="30" required />
+            <p className="form__error" id="item-name-error"></p>
+            <input className="form__item form__item_el_link" id="item-url" type="url" name="link" placeholder="Ссылка на картинку" required />
+            <p className="form__error" id="item-url-error"></p>
+          </>
+        }
+        buttonText="Создать"
+        />
+        <ImagePopup />
+        <PopupWithForm
+        name="confirm"
+        title="Вы уверены?"
+        children={
+          <>
+          </>
+        }
+        buttonText="Да"
+        />
+        <PopupWithForm
+        name="avatar"
+        title="Обновить аватар"
+        children={
+          <>
+            <input className="form__item" id="avatar-url" type="url" name="avatar" placeholder="Ссылка на картинку" required />
                 <p className="form__error" id="avatar-url-error"></p>
-              </fieldset>
-              <button className="form__submit-btn" type="submit">Сохранить</button>
-            </form>
-          </div>
-        </div>
+          </>
+        }
+        buttonText="Сохранить"
+        />
         <template id="element-template">
           <li className="element">
             <img className="element__image" src="#" alt="альт" />
