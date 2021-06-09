@@ -1,12 +1,13 @@
 import React from 'react';
 import './index.css';
+import logoPath from './images/header-logo.svg';
 
 function App() {
   return (
     <div className="page">
       <div className="page__container">
         <header className="header page__header">
-          <img src="<%=require('./images/header-logo.svg')%>" className="header__logo" alt="Логотип сервиса Mesto Russia" />
+          <img src={logoPath} className="header__logo" alt="Логотип сервиса Mesto Russia" />
         </header>
         <main className="content page__content">
           <section className="profile content__section">
@@ -84,7 +85,7 @@ function App() {
               <h2 className="form__heading">Обновить аватар</h2>
               <fieldset className="form__items">
                 <input className="form__item" id="avatar-url" type="url" name="avatar" placeholder="Ссылка на картинку" required />
-                <p className="form__error" id='avatar-url-error'></p>
+                <p className="form__error" id="avatar-url-error"></p>
               </fieldset>
               <button className="form__submit-btn" type="submit">Сохранить</button>
             </form>
