@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import './../index.css';
 import Header from './Header';
 import Main from './Main';
@@ -8,11 +8,37 @@ import ImagePopup from './ImagePopup';
 
 
 function App() {
+  const [isEditProfilePopupOpen, setEditProfilePopupOpen] = useState(false);
+  const [isAddPlacePopupOpen, setAddPlacePopupOpen] = useState(false);
+  const [isEditAvatarPopupOpen, setEditAvatarPopupOpen] = useState(false); 
+
+  function handleEditProfilePopupOpen() {
+    setEditProfilePopupOpen(!isEditProfilePopupOpen);
+  }
+
+  function handleAddPlacePopupOpen() {
+    setAddPlacePopupOpen(!isAddPlacePopupOpen);
+  }
+
+  function handleEditAvatarPopupOpen() {
+    setEditAvatarPopupOpen(!isEditAvatarPopupOpen);
+  }
+
+  function closeAllPopups() {
+    setEditProfilePopupOpen(false);
+    setAddPlacePopupOpen(false);
+    setEditAvatarPopupOpen(false);
+  }
+
   return (
     <div className="page">
       <div className="page__container">
         <Header />
-        <Main />
+        <Main
+          onEditProfile={handleEditProfilePopupOpen}
+          onAddPlace={handleAddPlacePopupOpen}
+          onEditAvatar={handleEditAvatarPopupOpen}
+        />
         <Footer />
         <PopupWithForm
         name="edit"
@@ -26,6 +52,8 @@ function App() {
           </>
         }
         buttonText="Сохранить"
+        isOpen={isEditProfilePopupOpen}
+        onClose={closeAllPopups}
         />
         <PopupWithForm
         name="add"
@@ -39,6 +67,8 @@ function App() {
           </>
         }
         buttonText="Создать"
+        isOpen={isAddPlacePopupOpen}
+        onClose={closeAllPopups}
         />
         <ImagePopup />
         <PopupWithForm
@@ -60,6 +90,8 @@ function App() {
           </>
         }
         buttonText="Сохранить"
+        isOpen={isEditAvatarPopupOpen}
+        onClose={closeAllPopups}
         />
         <template id="element-template">
           <li className="element">
