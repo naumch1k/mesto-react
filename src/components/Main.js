@@ -22,15 +22,7 @@ function Main(props) {
 
   React.useEffect(() => {
     api.getCards()
-      .then((res) => {
-        setCards(res.map(item => {
-          return {
-            name: item.name, 
-            link: item.link, 
-            likes: item.likes.length
-          };
-        }));
-      })
+      .then((res) => setCards(res))
       .catch((err) => {
         console.log(`Error: ${err}`);
       })
@@ -59,7 +51,7 @@ function Main(props) {
       <section className="elements content__section">
         <ul className="elements__list">
         {cards.map((card) => (
-          <Card onClick={props.onCardClick} card={card} />
+          <Card key={card._id} onClick={props.onCardClick} card={card} />
           ))}          
         </ul>
       </section>
