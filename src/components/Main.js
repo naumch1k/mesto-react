@@ -10,17 +10,7 @@ function Main({ onEditAvatar, onEditProfile, onAddPlace, onCardClick }) {
 
   React.useEffect(() => {
     api.getCards()
-      .then((res) => {
-        setCards(res.map(item => {
-          return {
-            owner: item.owner,
-            name: item.name, 
-            link: item.link, 
-            likes: item.likes,
-            _id: item._id
-          };
-        }));
-      })
+      .then((res) => setCards(res))
       .catch((err) => {
         console.log(`Error: ${err}`);
       })
@@ -71,7 +61,7 @@ function Main({ onEditAvatar, onEditProfile, onAddPlace, onCardClick }) {
       <section className="elements content__section">
         <ul className="elements__list">
         {cards.map((card) => (
-          <Card onClick={onCardClick} onCardLike={handleCardLike} onCardDelete={handleCardDelete} card={card} />
+          <Card key={card._id} onClick={onCardClick} onCardLike={handleCardLike} onCardDelete={handleCardDelete} card={card} />
           ))}          
         </ul>
       </section>
