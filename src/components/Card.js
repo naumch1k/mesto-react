@@ -1,6 +1,19 @@
 import React from 'react';
+import { CurrentUserContext } from '../contexts/CurrentUserContext';
 
 function Card({card, onClick}) {
+  const currentUser = React.useContext(CurrentUserContext);
+
+  const isOwned = card.owner._id === currentUser._id;
+  const isLiked = card.likes.some(item => item._id === currentUser._id);
+
+  const cardDeleteButtonClassName = (
+    `element__delete-btn ${isOwned ? '' : 'element__delete-btn_hidden'}`
+  );
+
+  const cardLikeButtonClassName = (
+    `element__like-btn ${isLiked ? 'element__like-btn_active' : ''}`
+  ); 
 
   function handleClick() {
     onClick(card);
@@ -12,11 +25,11 @@ function Card({card, onClick}) {
       <div className="element__desc">
         <h3 className="element__title">{card.name}</h3>
         <div className="element__like-container">
-          <button className="element__like-btn" type="button" aria-label="Поставить лайк"></button>
-          <span className="element__like-count">{card.likes}</span>
+          <button className={cardLikeButtonClassName} type="button" aria-label="Поставить лайк"></button>
+          <span className="element__like-count">{card.likes.length}</span>
         </div>
       </div>
-      <button className="element__delete-btn element__delete-btn_hidden" type="button" aria-label="Удалить фотографию"></button>
+      <button className={cardDeleteButtonClassName} type="button" aria-label="Удалить фотографию"></button>
     </li>
   );
 
