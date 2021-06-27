@@ -4,6 +4,7 @@ import Header from './Header';
 import Main from './Main';
 import Footer from './Footer';
 import EditProfilePopup from './EditProfilePopup';
+import EditAvatarPopup from './EditAvatarPopup';
 import PopupWithForm from './PopupWithForm';
 import ImagePopup from './ImagePopup';
 import api from '../utils/api';
@@ -22,6 +23,7 @@ function App() {
   const [isEditAvatarPopupOpen, setEditAvatarPopupOpen] = useState(false);
 
   const [profileSubmitButtonText, setProfileSubmitButtonText] = useState('Сохранить');
+  const [avatarSubmitButtonText, setAvatarSubmitButtonText] = useState('Сохранить');
 
   const [selectedCard, setSelectedCard] = useState(null);
 
@@ -37,6 +39,7 @@ function App() {
 
   const handleUpdateUser = (data) => {
     setProfileSubmitButtonText('Сохранение...');
+
     api.setUserInfo(data)
       .then((res) => {
         setCurrentUser(res);
@@ -45,10 +48,28 @@ function App() {
         setEditProfilePopupOpen(false);
       })
       .catch((err) => {
-        console.log(`Error: ${err}`);
+        console.log(`Unable to update user info. ${err}`);
       })
       .finally(() => {
         setProfileSubmitButtonText('Сохранить');
+      })
+  }
+
+  const handleUpdateAvatar = (data) => {
+    setAvatarSubmitButtonText('Сохранение...');
+
+    api.setUserAvatar(data)
+      .then((res) => {
+        setCurrentUser(res);
+      })
+      .then(() => {
+        setEditAvatarPopupOpen(false);
+      })
+      .catch((err) => {
+        console.log(`Unable to update user avatar. ${err}`);
+      })
+      .finally(() => {
+        setAvatarSubmitButtonText('Сохранить');
       })
   }
 
@@ -105,16 +126,12 @@ function App() {
             <input className="form__item form__item_el_link" id="item-url" type="url" name="link" placeholder="Ссылка на картинку" required />
             <p className="form__error" id="item-url-error"></p>
           </PopupWithForm>
-          <PopupWithForm
-            name="avatar"
-            title="Обновить аватар"
-            buttonText="Сохранить"
+          <EditAvatarPopup 
+            buttonText={avatarSubmitButtonText}
             isOpen={isEditAvatarPopupOpen}
+            onUpdateAvatar={handleUpdateAvatar}
             onClose={closeAllPopups}
-          >
-            <input className="form__item" id="avatar-url" type="url" name="avatar" placeholder="Ссылка на картинку" required />
-            <p className="form__error" id="avatar-url-error"></p>
-          </PopupWithForm>
+          /> 
           <PopupWithForm
             name="confirm"
             title="Вы уверены?"
