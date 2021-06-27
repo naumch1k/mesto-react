@@ -3,7 +3,7 @@ import api from '../utils/api';
 import Card from './Card';
 import { CurrentUserContext } from '../contexts/CurrentUserContext';
 
-function Main(props) {
+function Main({ onEditAvatar, onEditProfile, onAddPlace, onCardClick }) {
   const currentUser = React.useContext(CurrentUserContext);
   
   const [cards, setCards] = React.useState([]);
@@ -26,7 +26,7 @@ function Main(props) {
       })
   })
 
-  function handleCardLike(card) {
+  const handleCardLike = (card) => {
     const isLiked = card.likes.some(item => item._id === currentUser._id);
 
     api.changeLikeCardStatus(card._id, isLiked)
@@ -36,7 +36,17 @@ function Main(props) {
       .catch((err) => {
         console.log(`Error: ${err}`);
       })
-  } 
+  }
+
+  const handleCardDelete = (card) => {
+    api.deleteCard(card._id)
+      .then(() => {
+        setCards(cards.filter((item) => item !== card));
+      })
+      .catch((err) => {
+        console.log(`Error: ${err}`);
+      })
+  }
 
   return (
     <main className="content page__content">
@@ -44,24 +54,24 @@ function Main(props) {
         <div className="profile__avatar-container">
           <img className="profile__avatar" src={currentUser.avatar} alt="Логотип профиля" />
           <button className="profile__avatar-btn" aria-label="Обновить аватар"
-          onClick={props.onEditAvatar}
+          onClick={onEditAvatar}
           ></button>
         </div>
         <div className="profile__info">
           <h1 className="profile__name">{currentUser.name}</h1>
           <p className="profile__bio">{currentUser.about}</p>
           <button className="profile__edit-btn" type="button" aria-label="Редактировать профиль"
-          onClick={props.onEditProfile}
+          onClick={onEditProfile}
           ></button>
         </div>
         <button className="profile__add-btn" type="button" aria-label="Добавить фотографию"
-        onClick={props.onAddPlace}
+        onClick={onAddPlace}
         ></button>
       </section>
       <section className="elements content__section">
         <ul className="elements__list">
         {cards.map((card) => (
-          <Card onClick={props.onCardClick} onCardLike={handleCardLike} card={card} />
+          <Card onClick={onCardClick} onCardLike={handleCardLike} onCardDelete={handleCardDelete} card={card} />
           ))}          
         </ul>
       </section>
