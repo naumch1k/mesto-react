@@ -16,7 +16,8 @@ function Main(props) {
             owner: item.owner,
             name: item.name, 
             link: item.link, 
-            likes: item.likes
+            likes: item.likes,
+            _id: item._id
           };
         }));
       })
@@ -24,6 +25,18 @@ function Main(props) {
         console.log(`Error: ${err}`);
       })
   })
+
+  function handleCardLike(card) {
+    const isLiked = card.likes.some(item => item._id === currentUser._id);
+
+    api.changeLikeCardStatus(card._id, isLiked)
+      .then((newCard) => {
+        setCards((state) => state.map((currentCard) => currentCard._id === card._id ? newCard : currentCard));
+      })
+      .catch((err) => {
+        console.log(`Error: ${err}`);
+      })
+  } 
 
   return (
     <main className="content page__content">
@@ -48,7 +61,7 @@ function Main(props) {
       <section className="elements content__section">
         <ul className="elements__list">
         {cards.map((card) => (
-          <Card onClick={props.onCardClick} card={card} />
+          <Card onClick={props.onCardClick} onCardLike={handleCardLike} card={card} />
           ))}          
         </ul>
       </section>
