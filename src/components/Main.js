@@ -1,5 +1,6 @@
 import React from 'react';
 import Card from './Card';
+import Loader from './Loader';
 import { CurrentUserContext } from '../contexts/CurrentUserContext';
 
 function Main(props) {
@@ -26,17 +27,20 @@ function Main(props) {
         ></button>
       </section>
       <section className="elements content__section">
-        <ul className="elements__list">
-        {props.cards.map((card) => (
-          <Card 
-            key={card._id}
-            card={card}
-            onClick={props.onCardClick}
-            onCardLike={props.onCardLike}
-            onCardDelete={props.onCardDelete}
-          />
-          ))}          
-        </ul>
+        {props.isLoading 
+          ? <Loader />
+          : <ul className="elements__list">
+            {props.cards.map((card) => (
+              <Card 
+                key={card._id}
+                card={card}
+                onClick={props.onCardClick}
+                onCardLike={props.onCardLike}
+                onCardDelete={props.onCardDelete}
+              />
+              ))}          
+            </ul>
+        }
       </section>
     </main>
   )

@@ -1,5 +1,4 @@
 import React, {useState} from 'react';
-import './../index.css';
 import Header from './Header';
 import Main from './Main';
 import Footer from './Footer';
@@ -30,22 +29,23 @@ function App() {
   const [cards, setCards] = React.useState([]);
   const [selectedCard, setSelectedCard] = useState(null);
 
-  React.useEffect(() => {
-    api.getCards()
-      .then((res) => setCards(res))
-      .catch((err) => {
-        console.log(`Error: ${err}`);
-      })
-  })
+  const [isLoading, setIsLoading] = useState(false);
 
   React.useEffect(() => {
-    api.getUserInfo()
-      .then((res) => {
-        setCurrentUser(res);
+    setIsLoading(true);
+
+    Promise.all([api.getUserInfo(), api.getCards()])
+      .then(([userData, cardsData]) => {
+        setCurrentUser(userData);
+        setCards(cardsData);
       })
       .catch((err) => {
-        console.log(`Error: ${err}`);
+        console.log(`Couldnt get data from the server. ${err}`);
       })
+      .finally(() => {
+        setIsLoading(false);
+      }); 
+
   }, [])
 
   const handleUpdateUser = (data) => {
@@ -125,15 +125,15 @@ function App() {
   }
 
   function handleEditProfilePopupOpen() {
-    setEditProfilePopupOpen(!isEditProfilePopupOpen);
+    setEditProfilePopupOpen(true);
   }
 
   function handleAddPlacePopupOpen() {
-    setAddPlacePopupOpen(!isAddPlacePopupOpen);
+    setAddPlacePopupOpen(true);
   }
 
   function handleEditAvatarPopupOpen() {
-    setEditAvatarPopupOpen(!isEditAvatarPopupOpen);
+    setEditAvatarPopupOpen(true);
   }
 
   function handleCardClick(card) {
@@ -160,6 +160,7 @@ function App() {
             onCardClick={handleCardClick}
             onCardLike={handleCardLike}
             onCardDelete={handleCardDelete}
+            isLoading={isLoading}
           />
           <Footer />
           <EditProfilePopup 
