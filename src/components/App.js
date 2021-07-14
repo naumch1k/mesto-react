@@ -13,7 +13,7 @@ import { CurrentUserContext } from '../contexts/CurrentUserContext';
 
 function App() {
   const [currentUser, setCurrentUser] = useState({
-    name: 'Ирусик',
+    name: 'Irina Naumchik',
     about: 'offline',
     avatar: '',
   });
