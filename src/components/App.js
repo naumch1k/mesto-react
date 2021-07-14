@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, { useEffect, useState } from 'react';
 import Header from './Header';
 import Main from './Main';
 import Footer from './Footer';
@@ -26,12 +26,12 @@ function App() {
   const [avatarSubmitButtonText, setAvatarSubmitButtonText] = useState('Сохранить');
   const [cardSubmitButtonText, setCardSubmitButtonText] = useState('Создать');
 
-  const [cards, setCards] = React.useState([]);
+  const [cards, setCards] = useState([]);
   const [selectedCard, setSelectedCard] = useState(null);
 
   const [isLoading, setIsLoading] = useState(false);
 
-  React.useEffect(() => {
+  useEffect(() => {
     setIsLoading(true);
 
     Promise.all([api.getUserInfo(), api.getCards()])
