@@ -15,15 +15,34 @@
 * Likes counter
 * Full-sized image preview
 
-## Technologies
-* Flexbox and Grid Layout
-* Adaptive design
-* BEM Methodology, File Structure and File Paths (Nested BEM)
+## Tech
+React JS | BEM Methodology, File Structure and File Paths (Nested BEM) | Adaptive design | Flexbox and Grid Layout
 
-## Languages
-* JavaScript
-* JSX
+## Installation & Usage
+
+```bash
+# Clone the repository
+git clone https://github.com/naumch1k/mesto-react.git
+# Enter the project directory
+cd mesto-react
+# Install dependencies
+npm i
+```
+In the project directory, you can run:
+
+`npm start`
+
+> Starts a local server on [localhost:3000](http://localhost:3000)
+
+`npm run build`
+
+> Builds the app for production to the `build` folder
+
+`npm run deploy`
+
+> Places the production version code into the `gh-pages` branch
+
 
 ## TO DO
-* Close popups with esc/overlay click
-* Live form validation
+- [ ] Close popups with esc/overlay click
+- [ ] Live form validation
