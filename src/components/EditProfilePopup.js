@@ -26,7 +26,7 @@ function EditProfilePopup(props) {
     setName(e.target.value);
   }
 
-  const hanldeDescriptionChange = (e) => {
+  const handleDescriptionChange = (e) => {
     setDescription(e.target.value);
   }
 
@@ -59,7 +59,7 @@ function EditProfilePopup(props) {
         placeholder="About me" 
         minLength="2" maxLength="200" 
         value={description}
-        onChange={hanldeDescriptionChange}
+        onChange={handleDescriptionChange}
         required 
       />
       <p className="form__error" id="profile-bio-error"></p>
