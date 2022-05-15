@@ -1,4 +1,4 @@
-# Учебный проект: Mesto (React JS App)
+# Учебный проект: "Around The U.S." (React JS App)
 
 *Read this in other languages:* [EN](https://github.com/naumch1k/mesto-react/blob/main/README.md) 
 
