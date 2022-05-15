@@ -4,7 +4,7 @@ import logoPath from './../images/header-logo.svg';
 function Header() {
   return (
     <header className="header page__header">
-      <img className="header__logo" src={logoPath} alt="Логотип сервиса Mesto Russia" />
+      <img className="header__logo" src={logoPath} alt="Around the U.S. app logo" />
     </header>
   )
 }
