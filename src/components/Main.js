@@ -10,19 +10,19 @@ function Main(props) {
     <main className="content page__content">
       <section className="profile content__section">
         <div className="profile__avatar-container">
-          <img className="profile__avatar" src={currentUser.avatar} alt="Логотип профиля" />
-          <button className="profile__avatar-btn" aria-label="Обновить аватар"
+          <img className="profile__avatar" src={currentUser.avatar} alt="Profile avatar" />
+          <button className="profile__avatar-btn" aria-label="Update profile picture"
           onClick={props.onEditAvatar}
           ></button>
         </div>
         <div className="profile__info">
           <h1 className="profile__name">{currentUser.name}</h1>
           <p className="profile__bio">{currentUser.about}</p>
-          <button className="profile__edit-btn" type="button" aria-label="Редактировать профиль"
+          <button className="profile__edit-btn" type="button" aria-label="Edit profile"
           onClick={props.onEditProfile}
           ></button>
         </div>
-        <button className="profile__add-btn" type="button" aria-label="Добавить фотографию"
+        <button className="profile__add-btn" type="button" aria-label="Add image"
         onClick={props.onAddPlace}
         ></button>
       </section>

@@ -13,8 +13,8 @@ import { CurrentUserContext } from '../contexts/CurrentUserContext';
 
 function App() {
   const [currentUser, setCurrentUser] = useState({
-    name: 'Irina Naumchik',
-    about: 'offline',
+    name: 'Jacques Cousteau',
+    about: 'Explorer',
     avatar: '',
   });
 
@@ -22,9 +22,9 @@ function App() {
   const [isAddPlacePopupOpen, setAddPlacePopupOpen] = useState(false);
   const [isEditAvatarPopupOpen, setEditAvatarPopupOpen] = useState(false);
 
-  const [profileSubmitButtonText, setProfileSubmitButtonText] = useState('Сохранить');
-  const [avatarSubmitButtonText, setAvatarSubmitButtonText] = useState('Сохранить');
-  const [cardSubmitButtonText, setCardSubmitButtonText] = useState('Создать');
+  const [profileSubmitButtonText, setProfileSubmitButtonText] = useState('Save');
+  const [avatarSubmitButtonText, setAvatarSubmitButtonText] = useState('Save');
+  const [cardSubmitButtonText, setCardSubmitButtonText] = useState('Create');
 
   const [cards, setCards] = useState([]);
   const [selectedCard, setSelectedCard] = useState(null);
@@ -49,7 +49,7 @@ function App() {
   }, [])
 
   const handleUpdateUser = (data) => {
-    setProfileSubmitButtonText('Сохранение...');
+    setProfileSubmitButtonText('Saving...');
 
     api.setUserInfo(data)
       .then((res) => {
@@ -62,12 +62,12 @@ function App() {
         console.log(`Unable to update user info. ${err}`);
       })
       .finally(() => {
-        setProfileSubmitButtonText('Сохранить');
+        setProfileSubmitButtonText('Save');
       })
   }
 
   const handleAddPlace = (data) => {
-    setCardSubmitButtonText('Сохранение...');
+    setCardSubmitButtonText('Creating...');
 
     api.addNewCard(data)
       .then((newCard) => {
@@ -80,12 +80,12 @@ function App() {
         console.log(`Unable to publish a card. ${err}`);
       })
       .finally(() => {
-        setCardSubmitButtonText('Создать');
+        setCardSubmitButtonText('Create');
       })
   }
 
   const handleUpdateAvatar = (data) => {
-    setAvatarSubmitButtonText('Сохранение...');
+    setAvatarSubmitButtonText('Saving...');
 
     api.setUserAvatar(data)
       .then((res) => {
@@ -98,7 +98,7 @@ function App() {
         console.log(`Unable to update user avatar. ${err}`);
       })
       .finally(() => {
-        setAvatarSubmitButtonText('Сохранить');
+        setAvatarSubmitButtonText('Save');
       })
   }
 
@@ -184,8 +184,8 @@ function App() {
           /> 
           <PopupWithForm
             name="confirm"
-            title="Вы уверены?"
-            buttonText="Да"
+            title="Are you sure?"
+            buttonText="Yes"
           />
            { selectedCard && 
           <ImagePopup 
